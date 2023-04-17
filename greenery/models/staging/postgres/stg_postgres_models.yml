@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_postgres_addresses
+    description: "Addresses"
+  - name: stg_postgres_events
+    description: "Event Log"
+  - name: stg_postgres_order_items
+    description: "Orders broken out by products"
+  - name: stg_postgres_orders
+    description: "Order main"
+  - name: stg_postgres_products
+    description: "Product portfolio"
+  - name: stg_postgres_promos
+    description: "Current promotions and active status"
+  - name: stg_postgres_users
+    description: "User details"
+  
