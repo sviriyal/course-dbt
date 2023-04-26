@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: fct_page_views
+    description: "Model containing all page views and other event activity by user"
+    columns:
+      - name: session_id
+        tests:
+        - not_null
+      - name: user_id
+        tests:
+        - not_null
+      - name: session_length_minutes
+        tests:
+        - not_null
