@@ -8,10 +8,6 @@ with user_events as (
     select * from {{ ref('stg_postgres_events') }}
 )
 
-, users as (
-    select * from {{ ref('stg_postgres_users') }}
-)
-
 , products as (
     select * from {{ ref('stg_postgres_products') }}
 )
@@ -19,10 +15,6 @@ with user_events as (
 , final as (
     SELECT
         u.user_id,
-        users.first_name,
-        users.last_name,
-        users.email,
-        users.phone_number,
         u.session_id,
         u.product_id,
         products.name as product_name,
@@ -33,11 +25,9 @@ with user_events as (
         min(u.created_at) as first_created_at,
         max(u.created_at) as last_created_at
     from user_events as u
-    left join users
-    on u.user_id = users.user_id
     left join products
     on u.product_id = products.product_id
-    group by 1,2,3,4,5,6,7,8
+    group by 1,2,3,4
 )
 
 select * from final

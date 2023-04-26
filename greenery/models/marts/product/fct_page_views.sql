@@ -12,10 +12,6 @@ with user_events as (
 , final as (
     select 
         user_id,
-        first_name,
-        last_name,
-        email,
-        phone_number,
         session_id,
         product_id,
         product_name,
