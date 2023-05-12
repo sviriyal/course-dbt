@@ -1,22 +1,19 @@
 {{
-
     config(
-        MATERIALIZED = 'table'
+        materialized='table'
+        , post_hook=["grant select on {{ this }} to role reporting"]
     )
 }}
 
-with page_views as (
-    select * from {{ ref('fct_page_views') }}
-)
+with product_conversion as (
 
-, final as (
-    select 
-        product_name,
-        count(distinct session_id) as total_sessions,
-        sum(checkout) as total_orders,
-        div0(total_orders,total_sessions)
-    FROM page_views
-    GROUP BY product_name
-)
+{{ conversion_rate(ref('int_user_events'),'PRODUCT_ID','CHECKOUT','PAGE_VIEW') }}
 
-select * from final
+
+)
+select 
+product_id
+, numerator as purchases
+, denom as views
+, conversion as product_conversion 
+from product_conversion
