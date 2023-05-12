@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: dim_users
+    description: "Dimension table describing users"
+    columns:
+      - name: user_id
+        tests:
+        - not_null
